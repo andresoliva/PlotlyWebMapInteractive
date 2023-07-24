@@ -1,4 +1,4 @@
-﻿#note: This library must run using dash version  
+﻿#note: This script must run using dash version  
 #The following script was made in order to plot recieved data from a Data Collector Station (DCS)
 #this data is recieved as a 'pandas-compatible' array
 #
@@ -21,16 +21,20 @@
     
 #----------------------------------------------------------------------
 ##----------------------------libraries------------------
+##comands to intall all
+#pip install pyserial pandas plotly dash
+#conda install -c conda-forge pyserial pandas plotly dash
+
 import sys     #for getting file name
 import os      #for getting path
 import glob #for parsing text
 
-import serial #pip install pyserial
+import serial #pip install pyserial %conda install pyserial
 #uncomment in order to implement threads. This is not necesary in this programa
 #import threading           
 #import time                #to implement delays
 #to plot
-import plotly.graph_objects as go
+#import plotly.graph_objects as go #not used at the moment
 import plotly.express as px
 #pandas to handle structs
 import pandas as pd
@@ -76,7 +80,7 @@ class _Const(object):
   @constant
   def DCS_COLUMN_PLOTTRACE_SIZE():return 'hdop'     #IF DCS_COLUMN_PLOTTRACE_SIZE is not inside pandas struct, use size 
   @constant
-  def DCS_COLUMN_PLOTTRACE_SIZE_DEFAULT():return 1   #IF DCS_COLUMN_PLOTTRACE_SIZE is not inside pandas struct, use this as size
+  def DCS_COLUMN_PLOTTRACE_SIZE_DEFAULT():return 1.0   #IF DCS_COLUMN_PLOTTRACE_SIZE is not inside pandas struct, use this as size
   @constant
   def DCS_LOG_NAME():            return 'DCS_python_log' #part of the 
   @constant
@@ -204,6 +208,17 @@ def rxdata_to_string(byte_array_raw,start_word,end_word):
     if notfound:ret_nonparsed=byte_array #return all
     else:       ret_nonparsed=byte_array[i+i_min-len_start:i_max] #return non parsed
     return(ret_nonparsed,ret_struct)
+#--------------------------------------------------------------------
+#converts "2023-06-0110:00:05" to 2023-06-01 10:00:05
+
+def pd_correct_dataTime(df,column_name):
+   for index, row in df.iterrows(): #parse each row
+       Datetime_str=row[column_name]
+       if (Datetime_str[10]!=' '):
+           row[column_name]=''.join((Datetime_str[0:10],' ',Datetime_str[10:]))
+           df.loc[index]= row
+   return(df)   
+#--------------------------------------------------------------------
 #---------------------------------------------------------------------
 ##function to update data_frame and store log
 ##pass the original structure
@@ -231,21 +246,22 @@ def create_map_with_devices(pd_plot):
                          )      
     return fig   
 
-def update_devices_list_data(pd,pd_add):
+def update_devices_list_data(pd_in,pd_add):
    for index_add, row_add in pd_add.iterrows(): #compares to check if the added element exists 
         to_update=True #flag to ensure proper behaivour
-        for index, row in pd.iterrows():
+        for index, row in pd_in.iterrows():
             if (row_add[CONST.DCS_COLUMN_PLOTTRACE_NAME]==row[CONST.DCS_COLUMN_PLOTTRACE_NAME]): #elements alreay exist:, update 
                 #print("updating :",row_add['CONST.DCS_COLUMN_PLOTTRACE_NAME'] )
-                pd.loc[index]= pd_add.loc[index_add]
+                pd_in.loc[index]= pd_add.loc[index_add]
                 to_update=False
         if to_update==True:     
                 #print("adding :" ,row_add['CONST.DCS_COLUMN_PLOTTRACE_NAME'] )
-                pd=pd.append(row_add,ignore_index = True)
-   to_detect_DCS = pd[CONST.DCS_COLUMN_PLOTTRACE_NAME] ==CONST.DCS_NUMBER
-   pd.loc[to_detect_DCS, CONST.DCS_COLUMN_PLOTTRACE_NAME] = CONST.DCS_NAME
-   pd["ID_num"] = pd[CONST.DCS_COLUMN_PLOTTRACE_NAME].astype(str)
-   return pd                
+                pd_in=pd.concat([pd_in, row_add.to_frame().T],ignore_index = True)#pd.append(row_add,ignore_index = True)
+
+   to_detect_DCS = pd_in[CONST.DCS_COLUMN_PLOTTRACE_NAME] ==CONST.DCS_NUMBER
+   pd_in.loc[to_detect_DCS, CONST.DCS_COLUMN_PLOTTRACE_NAME] = CONST.DCS_NAME
+   pd_in["ID_num"] = pd_in[CONST.DCS_COLUMN_PLOTTRACE_NAME].astype(str)
+   return pd_in                
 #---------------------------------------------------------------------
 #--------------------check if test files exist, otherwise, generate them modes and adjust
 #----------------------------------------------------------------------
@@ -402,6 +418,7 @@ def function_update_plot(Rx_data,figure):
         if (len(pd_devices_update)>0):
             if(serial_rx_counter==-1): #first time creation
                     pd_devices=pd_devices_update.copy(deep=True);
+            pd_devices_update= pd_correct_dataTime(pd_devices_update,'dateTime_gps_UTC')#make corrections after parsing
             store_data_into_log_csv(pd_devices_update);
             pd_devices=update_devices_list_data(pd_devices,pd_devices_update) 
             #check if the pandas structure to plot has elements, then plot
