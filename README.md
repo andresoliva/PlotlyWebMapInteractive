@@ -57,12 +57,12 @@ For any questions or inquiries, please contact:
 
 ## Acknowledgments
 
-Special thanks to:
+Special thanks to the fellow members of the Chelonoidis Chilensis Tortoise Research Team in Argentina who made this possible :
 
-- Dr. Karina Laneri
+- PhD. Erika Kubisch
+- PhD.  Karina Laneri
+- PhD. Laila D. Kazimierski
 - Eng. Nicolás Catalano
-- Laila D. Kazimierski
-- Erika Kubisch
 ## Flowchart
 
 ```mermaid
