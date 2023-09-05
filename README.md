@@ -69,22 +69,7 @@ When running the script in simulation mode, the simulated data will be read from
 - [PySerial](https://pythonhosted.org/pyserial/): A Python library for serial communication.
 - [Pandas](https://pandas.pydata.org/): A data manipulation library.
 
-## Contact
-
-For any questions or inquiries, please contact:
-
-- Email: [olivaandres93@gmail.com](mailto:olivaandres93@gmail.com)
-- LinkedIn: [Andres Oliva Trevisan](https://www.linkedin.com/in/andres-oliva-trevisan-833561165/)
-
-## Acknowledgments
-
-Special thanks to the fellow members of the Chelonoidis Chilensis Tortoise Research Team in Argentina who made this possible :
-
-- PhD. Erika Kubisch
-- PhD.  Karina Laneri
-- PhD. Laila D. Kazimierski
-- Eng. Nicolás Catalano
-## Flowchart
+## Software Flowchart
 
 ```mermaid
 graph TD;
@@ -103,3 +88,20 @@ graph TD;
   J --> K[Close Serial Port]
   K --> L[End]
 ```
+
+
+## Contact
+
+For any questions or inquiries, please contact:
+
+- Email: [olivaandres93@gmail.com](mailto:olivaandres93@gmail.com)
+- LinkedIn: [Andres Oliva Trevisan](https://www.linkedin.com/in/andres-oliva-trevisan-833561165/)
+
+## Acknowledgments
+
+Special thanks to the fellow members of the Chelonoidis Chilensis Tortoise Research Team in Argentina who made this possible :
+
+- PhD. Erika Kubisch
+- PhD.  Karina Laneri
+- PhD. Laila D. Kazimierski
+- Eng. Nicolás Catalano
