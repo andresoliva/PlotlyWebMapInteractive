@@ -1,8 +1,15 @@
 # Data Collector Station (DCS) Plotter
 
-This Python script is designed to receive and plot data from a Data Collector Station (DCS). The received data is expected to be in a Pandas-compatible array format.
+This Python script is designed to receive and plot data into a web site (by creating a local webserver) received through a serial port from a Data Collector Station (DCS) device. The DCS receives the information sent by radio frequency from a Monitoring Device (MD) attached to different tortoises. The received data through the serial port  is expected to be in a Pandas-compatible array format. Then the information received by the script will be stored in a .csv log. This Scripts also allows you to simulate the data received from the serial port, meaning that you do not need to have any device outside a computer to run the script in order to test it. 
 
-![Sample DCS Plot](example_plot.png)
+For further information regarding the devices utilized (MD and DCS), [check the following repository](https://github.com/TortoisesSAO/CodesDevice): 
+
+### Example of locations displayed
+<img src="./pictures/2_sim1.png" width=50% align="center"> 
+
+### Example of mouser over and data displayed over one of the monitoring devices 
+
+<img src="./pictures/2_sim2.png" width=50% align="center"> 
 
 ## Table of Contents
 
@@ -15,7 +22,7 @@ This Python script is designed to receive and plot data from a Data Collector St
 
 ## About
 
-This script was created as part of an engineering master's degree thesis at Instituto Balseiro, Argentina, by Andres Oliva Trevisan. It allows you to visualize data received from a DCS on a map. The script can either read data from a real serial port or simulate data for testing purposes.
+This script was created as part of my engineering master's degree thesis at Instituto Balseiro, Argentina. It allows you to visualize data received from a DCS on a plotted map. The script can either read data from a real serial port or simulate data for testing purposes.
 
 ### Tested Library Versions
 
@@ -40,6 +47,19 @@ pip install pyserial pandas plotly dash
 - Select the serial port you want to use from the dropdown menu.
 - The script will continuously read data from the selected serial port or simulate data if the "Simulate Serial Port" option is chosen.
 - The received data will be displayed on a map with markers indicating various information about the DCS devices.
+
+#### Serial Data Simulation
+
+When running the script in simulation mode, the simulated data will be read from the following files. If this files do now exist, they will be created by the script autonamitcly.
+<img src="./pictures/3_examples.png" width=50% align="center"> 
+
+##### Simulated data: Default values
+
+<img src="./pictures/4_examples.png" width=50% align="center"> 
+
+##### Simulated data: Serial port simulation
+
+<img src="./pictures/4_examples_serial.png" width=50% align="center"> 
 
 ## Dependencies
 
