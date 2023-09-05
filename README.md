@@ -5,11 +5,11 @@ This Python script is designed to receive and plot data into a web site (by crea
 For further information regarding the devices utilized (MD and DCS), [check the following repository](https://github.com/TortoisesSAO/CodesDevice): 
 
 ### Example of locations displayed
-<img src="./pictures/2_sim1.png" width=50% align="center"> 
+<img src="./pictures/2_sim1.png" width=60% align="center"> 
 
 ### Example of mouser over and data displayed over one of the monitoring devices 
 
-<img src="./pictures/2_sim2.png" width=50% align="center"> 
+<img src="./pictures/2_sim2.png" width=60% align="center"> 
 
 ## Table of Contents
 
@@ -50,16 +50,17 @@ pip install pyserial pandas plotly dash
 
 #### Serial Data Simulation
 
-When running the script in simulation mode, the simulated data will be read from the following files. If this files do now exist, they will be created by the script autonamitcly.
-<img src="./pictures/3_examples.png" width=50% align="center"> 
+When running the script in simulation mode, the simulated data will be read from the following files. If these files do now exist, they will be created by the script automatically.
+
+<img src="./pictures/3_examples.png" width=60% align="center"> 
 
 ##### Simulated data: Default values
 
-<img src="./pictures/4_examples.png" width=50% align="center"> 
+<img src="./pictures/4_examples.png" width=80% align="center"> 
 
 ##### Simulated data: Serial port simulation
 
-<img src="./pictures/4_examples_serial.png" width=50% align="center"> 
+<img src="./pictures/4_examples_serial.png" width=80% align="center"> 
 
 ## Dependencies
 
