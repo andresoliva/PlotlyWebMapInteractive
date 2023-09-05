@@ -71,6 +71,8 @@ When running the script in simulation mode, the simulated data will be read from
 
 ## Software Flowchart
 
+The following chart shows in a very simple way how the script works. Keep in mind that the serial data reception happens in a different thread than the one who is making the plots.
+
 ```mermaid
 graph TD;
   A[Start] --> B[Open Serial Port]
