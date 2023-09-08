@@ -22,7 +22,7 @@ For further information regarding the devices utilized (MD and DCS), [check the 
 
 ## About
 
-This script was created as part of my engineering master's degree thesis at Instituto Balseiro, Argentina. It allows you to visualize data received from a DCS on a plotted map. The script can either read data from a real serial port or simulate data for testing purposes.
+This script was created as part of my engineering master's degree thesis at Instituto Balseiro, Argentina. It allows you to visualize data received from a DCS on a plotted map by using Dash and Plotly to create a web server that holds the website in which the plot is created. The script can either read data from a real serial port or simulate data to allow the user to test the script without any external hardware.
 
 ### Tested Library Versions
 
